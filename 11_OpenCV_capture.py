@@ -1,19 +1,20 @@
-import cv2
+import cv2, time
 
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+# video = cv2.VideoCapture("movie.mp4") #capture from movie
+video = cv2.VideoCapture(0) #capture from camera
 
-img = cv2.imread("photo.jpg")
-gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+while True:
+    check, frame = video.read()
 
-faces = face_cascade.detectMultiScale(gray_img, scaleFactor = 1.05, minNeighbors = 5)
+    cv2.imshow("Capturing", frame)
 
-#first_column, first_row, width, height
-print (faces)
-print (type(faces))
+    key = cv2.waitKey(2)
 
-for x, y, width, height in faces:
-    #draw a green rectangle around the face, 3 pixels width
-    img_face = cv2.rectangle(img, (x, y), (x + width, y + height), (0, 255, 0), 3)
-    print (x, y, width, height)
+    if key == ord('q'):
+        break
 
-cv2.imwrite("Face_detector.jpg", img_face)
+
+
+
+
+video.release() #to close the already opened files or camera

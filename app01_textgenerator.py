@@ -7,4 +7,4 @@ def generator():
     name = letter1 + letter2 + letter3
     return name
 
-print generator()
+print (generator())

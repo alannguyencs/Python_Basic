@@ -1,0 +1,3 @@
+([('app05_Book_store',
+   '/Users/alan/PycharmProjects/Python_Basic/dist/app05_Book_store',
+   'EXECUTABLE')],)

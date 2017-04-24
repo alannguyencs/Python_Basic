@@ -1,18 +1,19 @@
 import cv2
 
-img = cv2.imread("galaxy.jpg", 0)
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-print (type(img))
-print (img)
-print (img.shape)
-print (img.ndim) #2 dimensions
+img = cv2.imread("photo.jpg")
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-ratio = 2
-resized_image = cv2.resize(img, (int(img.shape[1]/2), int(img.shape[0]/2)))
+faces = face_cascade.detectMultiScale(gray_img, scaleFactor = 1.05, minNeighbors = 5)
 
-cv2.imwrite("Galaxy_resized.jpg", resized_image)
-print (resized_image.shape)
+#first_column, first_row, width, height
+print (faces)
+print (type(faces))
 
-# cv2.imshow("Galaxy", img)
-# cv2.waitKey(2000)
-# cv2.destroyAllWindows()
+for x, y, width, height in faces:
+    #draw a green rectangle around the face, 3 pixels width
+    img_face = cv2.rectangle(img, (x, y), (x + width, y + height), (0, 255, 0), 3)
+    print (x, y, width, height)
+
+cv2.imwrite("Face_detector.jpg", img_face)
